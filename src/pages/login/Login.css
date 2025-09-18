@@ -1,0 +1,98 @@
+.tela-login {
+  /* background-color: #1046ac; */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 0 !important; */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.mycard {
+  background-color: #383b38;
+  width: 400px;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #f9f9f9;
+  border-radius: 6px;
+}
+
+.title {
+  text-align: center;
+  align-items: center;
+  background-color: #1a181a;
+  color: #f9f9f9;
+  font-size: 1.5rem;
+  height: 50px;
+  margin-bottom: 40px;
+}
+
+.input-login {
+  /* color: #202020 !important;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9 !important;
+  border-radius: 6px;
+  transition: all 0.3s ease; */
+
+  color: #f9f9f9 !important;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #2a2e2a;
+  background-color: #2a2e2a !important;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  /* border-color: #1046ac;
+  box-shadow: 0 0 4px rgba(16, 70, 172, 0.8); */
+  outline: none;
+  background-color: #fff;
+}
+
+.button {
+  /* padding: 10px;
+  margin-top: 10px;
+  background-color: #1046ac;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer; */
+
+  margin-top: 0px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.but-signin {
+  padding: 15px 30px;
+  border: 0;
+  background: transparent;
+  color: #8e8e8e;
+  font-size: 16px;
+  /* font-weight: bold; */
+  border-radius: 10px;
+  cursor: pointer;
+}

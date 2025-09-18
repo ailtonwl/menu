@@ -1,0 +1,160 @@
+.tela-login {
+  background-color: #2a2e2a;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 0 !important; */
+}
+
+.mycard {
+  background-color: #383b38;
+  width: 400px;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #f9f9f9;
+  border-radius: 10px;
+}
+
+.mycard-compra {
+  background-color: #383b38;
+  width: 600px;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #f9f9f9;
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  background-color: #1a181a;
+  color: #f9f9f9;
+  font-size: 1.5rem;
+  height: 50px;
+  padding-top: 10px;
+  margin-left: -20px;
+  margin-right: -20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.container-itens {
+  height: 70px;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.itemBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.div-limpa {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+label {
+  text-align: left;
+  /* margin-bottom: 5px; */
+}
+
+.input-pessoa {
+  color: #f9f9f9 !important;
+  font-size: 1rem;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #2a2e2a;
+  background-color: #2a2e2a;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.input-pessoa:focus {
+  color: #f9f9f9 !important;
+  border-color: #f9f9f9;
+  box-shadow: 0 0 4px rgba(16, 70, 172, 0.8);
+  outline: none;
+  background-color: #2a2e2a;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border: 1px solid #2a2e2a;
+  border-radius: 6px;
+  background-color: #2a2e2a;
+  color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #f9f9f9;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  outline: none;
+  background-color: #2a2e2a;
+}
+
+.button {
+  /* padding: 10px; */
+  margin: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add {
+  background-color: #19305c;
+  color: #FFF;
+}
+
+.cancel {
+  background-color: #ccc;
+  color: #2a2e2a;
+}
+
+.button:hover {
+  border-color: #000;
+  opacity: 0.9;
+}
+
+.grid-cab {
+  border-bottom: 1px solid #f9f9f9;
+  margin-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.grid-itens {
+  margin-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pos-left {
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pos-right {
+  text-align: right;
+}
+
+.pos-center {
+  text-align: right;
+}
