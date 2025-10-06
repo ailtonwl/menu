@@ -11,6 +11,7 @@ import Plus from '../../assets/addcircle.svg';
 import Delete from '../../assets/delete.svg';
 import Edit from '../../assets/edit.svg';
 import ConfirmModal from '../../components/common/ConfirmModal.tsx';
+import CompraFiltro from './CompraFiltro.tsx';
 import { formatarParaBRL } from '../../components/common/Tools';
 import './styles.css';
 
@@ -38,6 +39,10 @@ export default function Compras() {
     }]
   }
 
+  const { setCompra } = useContext(AppContext);
+  const [totalCompras, setTotalCompras] = useState(0);
+  const [pessoas, setPessoas] = useState([]);
+  const [allCompras, setAllCompras] = useState([]);
   const [compras, setCompras] = useState([]);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -45,6 +50,14 @@ export default function Compras() {
 
   const [nomePessoa, setNomePessoa] = useState("");
   const [valorCompra, setValorCompra] = useState(0);
+
+  const [mostrarFiltro, setMostrarFiltro] = useState(false);
+  const [filtros, setFiltros] = useState({
+    dataInicio: '',
+    dataFim: '',
+    pessoaId: 0,
+    ativo: false,
+  });
 
   function confirmarExclusao(id: number, vrTotal: number, nomePessoa: string) {
     if (id !== null) {
@@ -73,8 +86,6 @@ export default function Compras() {
     navigate('/compras/add');
   }
 
-  const { setCompra } = useContext(AppContext);
-
   function alteraCompra(data: tipoCompra) {
 
     setCompra(data);
@@ -87,7 +98,7 @@ export default function Compras() {
       const response = await api.delete(`/compra/${id}`);
       if (response) {
         toast.success('Compra excluída com sucesso! 🎉');
-        setTimeout(() => navigate('/compras'), 3000); // Aguarda 3s antes de redirecionar
+        setTimeout(() => navigate('/compras'), 2000); // Aguarda 2s antes de redirecionar
 
       } else {
         toast.error('Erro ao excluir a compra. Verifique os dados e tente novamente.');
@@ -99,13 +110,47 @@ export default function Compras() {
     getCompras();
   }
 
-  useEffect(() => { }, [compras]);
+  async function getPessoas() {
+    const pessoasFromApi = await api.get('/pessoa');
+    setPessoas(pessoasFromApi.data);
+  }
+
+  useEffect(() => {
+    getPessoas();
+    getCompras();
+   }, []);
+
+  function desfazerFiltros() {
+    setFiltros({ dataInicio:'', dataFim:'', pessoaId:0, ativo:false });
+    setCompras(allCompras);
+  }
+
+  function filtrarCompras() {
+    let comprasFiltradas = [...allCompras];
+    if (filtros.dataInicio) {
+      comprasFiltradas = comprasFiltradas.filter(v => v.dtemissao.substring(0,10) >= filtros.dataInicio);
+    }
+    if (filtros.dataFim) {
+      comprasFiltradas = comprasFiltradas.filter(v => v.dtemissao.substring(0,10) <= filtros.dataFim);
+    }
+    if (filtros.pessoaId && filtros.pessoaId !== 0) {
+      comprasFiltradas = comprasFiltradas.filter(v => v.pessoaId === filtros.pessoaId);
+    }
+    if (filtros.ativo) {
+      comprasFiltradas = comprasFiltradas.filter(v => v.ativo);
+    }
+    setCompras(comprasFiltradas);
+  }
+
+  useEffect(() => {
+    atuTotais();
+  }, [compras]);
 
   async function getCompras() {
 
     const comprasFromApi = await api.get('/compra');
     setCompras(comprasFromApi.data);
-
+    setAllCompras(comprasFromApi.data);
   }
 
   const [isLoading, setIsLoading] = useState(true);
@@ -115,14 +160,38 @@ export default function Compras() {
     setIsLoading(false);
   }
 
+  function atuTotais() {
+    let total = compras?.reduce((acc, item) => acc + item.vrtotal, 0) || 0;
+    setTotalCompras(total);
+  }
+
   return (
-    <div className="container corpo">
+    <div className="corpo">
       <div className="titOpcoes">
         <h2>Lista de Compras</h2>
         <button className='butAdd' aria-label="Adicionar produto" onClick={adicionaCompra}>
           <img alt='Imagem plus' src={Plus} />
         </button>
+        {
+          (!filtros.ativo && filtros.dataFim==='' && filtros.dataInicio==='' && filtros.pessoaId===0)
+          ? <button className='filtros-vazio' onClick={() => setMostrarFiltro(!mostrarFiltro)}>🔍 Filtros</button>
+          : <button className='filtros' onClick={() => setMostrarFiltro(!mostrarFiltro)}>🔍 Filtros</button>
+        }
       </div>
+      <div className="info-container larg-900">
+        <div className="row">
+          <div className="col">Total das compras: {formatarParaBRL(totalCompras)}</div>
+        </div>
+      </div>
+      {mostrarFiltro && (
+        <CompraFiltro
+          pessoas={pessoas}
+          filtros={filtros}
+          setFiltros={setFiltros}
+          aplicarFiltros={filtrarCompras}
+          desfazerFiltros={desfazerFiltros}
+        />
+      )}
       {compras.map((compra:tipoCompra) => (
         <div key={compra.id} className='item-tabela'>
           <div className="row">

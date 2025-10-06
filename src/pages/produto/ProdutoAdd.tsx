@@ -110,7 +110,7 @@ function ProdutoAdd() {
   }
 
   return (
-    <div className="tela-login">
+    <div className="tela-produto">
       <div className="mycard">
         <h2 className="title">Novo Produto</h2>
         <div id="nomeUsuario"></div>

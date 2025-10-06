@@ -19,7 +19,7 @@ import './styles.css';
 export default function Vendas() {
   type tipoVenda = {
     id: number,
-    dtemissao: string,
+    dtemissao: Date,
     nrdocumento: string,
     vrtotal: number,
     ativo: boolean,
@@ -109,7 +109,7 @@ export default function Vendas() {
       const response = await api.delete(`/venda/${id}`);
       if (response) {
         toast.success('Venda excluída com sucesso! 🎉');
-        setTimeout(() => navigate('/vendas'), 3000); // Aguarda 3s antes de redirecionar
+        setTimeout(() => navigate('/vendas'), 2000); // Aguarda 2s antes de redirecionar
       } else {
         toast.error('Erro ao excluir a venda. Verifique os dados e tente novamente.');
       }
@@ -180,9 +180,14 @@ export default function Vendas() {
         <button className='butAdd' aria-label="Adicionar produto" onClick={adicionaVenda}>
           <img alt='Imagem plus' src={Plus} />
         </button>
-        <button className='filtros' onClick={() => setMostrarFiltro(!mostrarFiltro)}>🔍 Filtros</button>
+        {
+          (!filtros.ativo && filtros.dataFim==='' && filtros.dataInicio==='' && filtros.pessoaId===0 && filtros.status.length===0)
+          ? <button className='filtros-vazio' onClick={() => setMostrarFiltro(!mostrarFiltro)}>🔍 Filtros</button>
+          : <button className='filtros' onClick={() => setMostrarFiltro(!mostrarFiltro)}>🔍 Filtros</button>
+        }
+
       </div>
-      <div className="info-container">
+      <div className="info-container larg-900">
         <div className="row">
           <div className="col">Total das vendas: {formatarParaBRL(totalVendas)}</div>
           <div className="col">Total a receber: {formatarParaBRL(totalReceber)}</div>
@@ -230,6 +235,7 @@ export default function Vendas() {
               <div className='col p-0'>Documento: {venda.nrdocumento}</div>
               <div className='col p-0'>{`Emissão: ${venda.dtemissao.substring(8,10)}/${venda.dtemissao.substring(5,7)}/${venda.dtemissao.substring(0,4)}`}</div>
               <div className='col p-0 text-end'>Total: {formatarParaBRL(venda.vrtotal)}</div>
+              <div className='col p-0 text-end'>Receber: {formatarParaBRL(venda.vrtotal - venda.vrrecebido)}</div>
             </div>
           </div>
 

@@ -4,7 +4,7 @@ import api from '../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import '../../App.css';
+import './styles.css';
 
 type tipoPessoa = {
   id: number,
@@ -46,7 +46,7 @@ function PessoaAdd() {
   };
 
   return (
-    <div className="tela-login">
+    <div className="tela-pessoa">
       <div className="mycard">
         <h2 className="title">Nova Pessoa</h2>
         <div id="nomeUsuario"></div>

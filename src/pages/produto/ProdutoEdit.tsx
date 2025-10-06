@@ -117,7 +117,7 @@ function ProdutoEdit() {
   if (isLoading) return <div>Carregando...</div>
 
   return (
-    <div className="tela-login">
+    <div className="tela-produto">
       <div className="mycard">
         <h2 className="title">Alterar Produto</h2>
         <FormProvider {...formMethods}>

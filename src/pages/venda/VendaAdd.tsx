@@ -12,12 +12,33 @@ import './styles.css';
 
 function VendaAdd() {
 
+  function convertStringToDatetimeLocal(inputString:string) {
+    // Tente criar um objeto Date a partir da string
+    const date = new Date(inputString);
+
+    // Verifique se a data é válida
+    if (isNaN(date.getTime())) {
+        throw new Error("Data inválida. Certifique-se de que a string está no formato correto.");
+    }
+
+    // Formate a data no padrão 'YYYY-MM-DDTHH:mm'
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()-3).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+
   const { venda } = useContext(AppContext);
   const navigate = useNavigate();
+  const inputData = new Date().toISOString().slice(0, 16);
 
   const formMethods = useForm({
     defaultValues: {
-      dtemissao: '',
+      // dtemissao: new Date(),
+      dtemissao: convertStringToDatetimeLocal(inputData),
       nrdocumento: '',
       fornecedor: '',
       vrtotal: 0,
@@ -61,8 +82,11 @@ function VendaAdd() {
 
       const itens:any = [];
 
+
       reset({
-        dtemissao: new Date().toISOString().slice(0, 10),
+        dtemissao: convertStringToDatetimeLocal(inputData),
+        // dtemissao: new Date().toISOString().slice(0, 10),
+        // dtemissao: new Date(),
         nrdocumento: '',
         fornecedor: '',
         vrtotal: 0,
@@ -87,9 +111,17 @@ function VendaAdd() {
       return;
     }
 
+    const localDate = fields.dtemissao.slice(0,16);
+    // const hora = new Date().toTimeString().slice(0,5);
+    const dataHora = `${localDate}:00`;
+
+    console.log(dataHora);
+
+
     const vendaAtualizada = {
       id: venda.id,
-      dtemissao: fields.dtemissao,
+      // dtemissao: fields.dtemissao,
+      dtemissao: dataHora,
       nrdocumento: fields.nrdocumento,
       pessoaId: fields.fornecedor,
       vrtotal: vrTotal,
@@ -131,7 +163,7 @@ function VendaAdd() {
             <div className='container-itens'>
               <div className="mb-0 text-start">
                 <label htmlFor="dtemissao">Data Emissão</label>
-                <input {...register('dtemissao')} className='input-venda' type="date" required />
+                <input {...register('dtemissao')} className='input-venda' type="datetime-local" required />
               </div>
               <div className="mb-0 text-start">
                 <label htmlFor="nrdocumento">Nº Documento</label>

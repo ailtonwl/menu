@@ -45,7 +45,7 @@ function UnidadeAdd() {
   };
 
   return (
-    <div className="tela-login">
+    <div className="tela-unidade">
       <div className="mycard">
         <h2 className="title">Nova Unidade</h2>
         <div id="nomeUsuario"></div>

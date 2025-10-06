@@ -64,7 +64,7 @@ function PessoaEdit() {
   }
 
   return (
-    <div className="tela-login">
+    <div className="tela-pessoa">
       <div className="mycard">
         <h2 className="title">Alterar Pessoa</h2>
         <div id="nomeUsuario"></div>
