@@ -35,10 +35,10 @@ export default function Login() {
 
   async function handleSignIn({ email, password }: FormData) {
     try {
-      const response = await fetch('http://localhost:8080/user/signin', {
+      const response = await fetch('http://189.126.106.253:8080/user/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
 

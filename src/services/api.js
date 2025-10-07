@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080'
+  baseURL: 'http://189.126.106.253:8080'
 })
 
 // Interceptor de requisição
