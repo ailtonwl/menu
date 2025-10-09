@@ -151,7 +151,7 @@ function CompraEdit() {
               </div>
             </div>
             <div className="mb-0 text-start">
-              <SelectFornecedor fornecedores={pessoas} />
+              <SelectFornecedor fornecedores={pessoas} espPessoa={"fornecedor"} />
             </div>
 
             <ItemCompraForm produtos={produtos} adicionarItem={adicionarItem} form={formMethods} />

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import SelectFornecedor from '../../components/form/SelectFornecedor';
 import ItemCompraForm from './ItemCompraForm';
 
 type tipoCompra = {
@@ -181,7 +182,7 @@ function CompraAdd() {
               <input className='input-compra text-end' name='vrtotal' id='vrtotal' value={vrTotal} readOnly />
             </div>
           </div>
-          <div className="mb-0 text-start">
+          {/* <div className="mb-0 text-start">
             <label htmlFor="fornecedor">Fornecedor</label>
             <select id="fornecedor" {...register("fornecedor", { valueAsNumber: true })} >
               <option value="0">Selecione um fornecedor</option>
@@ -193,6 +194,10 @@ function CompraAdd() {
               ))
               }
             </select>
+          </div> */}
+
+          <div className="mb-0 text-start">
+            <SelectFornecedor fornecedores={pessoas} espPessoa={"fornecedor"} />
           </div>
 
           <ItemCompraForm

@@ -143,7 +143,7 @@ function VendaEdit() {
             </div>
 
             <div className="mb-0 text-start">
-              <SelectFornecedor fornecedores={pessoas} />
+              <SelectFornecedor fornecedores={pessoas} espPessoa={"cliente"} />
             </div>
 
             <ItemVendaForm produtos={produtos} append={append} />
